@@ -18,6 +18,10 @@ const protect = async (req, res, next) => {
       // Get user from the token, omitting the password field
       req.user = await User.findById(decoded.id).select('-password');
 
+      if (!req.user) {
+        return res.status(401).json({ success: false, message: 'User no longer exists' });
+      }
+
       next();
     } catch (error) {
       console.error(error);
