@@ -30,7 +30,7 @@ function AppContent() {
           <div className="container mx-auto flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2 font-bold text-xl text-blue-600 hover:text-blue-700 transition">
               <PieChart className="w-6 h-6" />
-              Smart Expense Tracker
+              FinTrack
             </Link>
             
             {user && (
