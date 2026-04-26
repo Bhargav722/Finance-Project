@@ -14,8 +14,8 @@ connectDB();
 const app = express();
 
 // Middleware
+app.use(cors()); // Enable CORS first
 app.use(express.json()); // Body parser
-app.use(cors()); // Enable CORS
 app.use(helmet()); // Set security HTTP headers
 app.use(morgan('dev')); // Logging
 
