@@ -94,12 +94,13 @@ const getUserProfile = async (req, res) => {
 // @access  Private
 const updateBudget = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { monthlyBudget: req.body.budget || 0 },
+      { new: true, runValidators: true }
+    );
 
-    if (user) {
-      user.monthlyBudget = req.body.budget || 0;
-      const updatedUser = await user.save();
-      
+    if (updatedUser) {
       res.json({
         success: true,
         _id: updatedUser._id,
@@ -111,6 +112,7 @@ const updateBudget = async (req, res) => {
       res.status(404).json({ success: false, message: 'User not found' });
     }
   } catch (error) {
+    console.error('Update Budget Error:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
